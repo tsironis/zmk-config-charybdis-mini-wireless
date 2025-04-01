@@ -152,7 +152,7 @@
         SYMBOLS {
             bindings = <
 &trans  &kp LEFT_BRACE  &kp AMPERSAND  &kp ASTERISK          &kp LEFT_PARENTHESIS   &kp RIGHT_BRACE    &trans  &trans     &trans     &trans    &trans    &trans
-&trans  &kp PIPE        &kp DOLLAR     &kp PERCENT           &kp LCTRL              &kp PLUS           &trans  &kp RSHFT  &kp RCTRL  &kp RALT  &kp RGUI  &trans
+&trans  &kp PIPE        &kp DOLLAR     &kp PERCENT           &kp CARET              &kp PLUS           &trans  &kp RSHFT  &kp RCTRL  &kp RALT  &kp RGUI  &trans
 &trans  &kp TILDE       &kp EXCL       &kp AT                &kp HASH               &kp COLON          &trans  &trans     &trans     &trans    &trans    &trans
                                        &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp UNDERSCORE     &trans  &trans
             >;
