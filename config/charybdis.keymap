@@ -115,9 +115,9 @@
 
         SYMNUM {
             bindings = <
-&trans  &trans        &trans        &trans     &trans          &trans    &trans          &kp CAPS        &caps_word    &trans     &trans  &trans
-&trans  &kp LEFT_GUI  &kp LEFT_ALT  &kp LCTRL  &kp LEFT_SHIFT  &trans    &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT  &trans  &trans
-&trans  &trans        &trans        &trans     &trans          &trans    &kp HOME        &kp PAGE_DOWN   &kp PAGE_UP   &kp END    &trans  &trans
+&trans  &trans        &trans        &trans     &trans          &trans    &trans          &kp CAPS        &caps_word    &trans     &trans    &trans
+&trans  &kp LEFT_GUI  &kp LEFT_ALT  &kp LCTRL  &kp LEFT_SHIFT  &trans    &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT  &kp SEMI  &trans
+&trans  &trans        &trans        &trans     &trans          &trans    &kp HOME        &kp PAGE_DOWN   &kp PAGE_UP   &kp END    &trans    &trans
                                     &trans     &trans          &trans    &kp ENTER       &kp BACKSPACE
             >;
         };
