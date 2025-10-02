@@ -29,41 +29,6 @@
             key-positions = <21 22>;
         };
 
-        ParaLeft {
-            bindings = <&kp LEFT_PARENTHESIS>;
-            key-positions = <14 15>;
-        };
-
-        ParaRight {
-            bindings = <&kp RIGHT_PARENTHESIS>;
-            key-positions = <15 16>;
-        };
-
-        BrakLeft {
-            bindings = <&kp LEFT_BRACKET>;
-            key-positions = <3 2>;
-        };
-
-        BrakRight {
-            bindings = <&kp RIGHT_BRACKET>;
-            key-positions = <3 4>;
-        };
-
-        BraceLeft {
-            bindings = <&kp LEFT_BRACE>;
-            key-positions = <26 27>;
-        };
-
-        BraceRight {
-            bindings = <&kp RIGHT_BRACE>;
-            key-positions = <27 28>;
-        };
-
-        Delete {
-            bindings = <&kp DELETE>;
-            key-positions = <8 9>;
-        };
-
         CapsWord {
             bindings = <&caps_word>;
             key-positions = <17 18>;
