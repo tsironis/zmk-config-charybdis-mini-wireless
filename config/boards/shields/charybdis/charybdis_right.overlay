@@ -5,6 +5,7 @@
  */
  
 #include "charybdis.dtsi"
+#include <input/processors.dtsi>
 
 &default_transform {
 	col-offset = <6>;
@@ -66,9 +67,16 @@
 };
 
 / {
-  trackball_listener {
-    compatible = "zmk,input-listener";
-    device = <&trackball>;
-
-  };
+    trackball_listener: trackball_listener {
+        compatible = "zmk,input-listener";
+        device = <&trackball>;
+        input-processors = <&zip_xy_scaler 2 1>;
+        
+        scroll_mode {
+            layers = <4>;
+            input-processors = <&zip_xy_to_scroll_mapper>;
+            process-next;
+        };
+    };
 };
+
