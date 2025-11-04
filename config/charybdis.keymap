@@ -7,6 +7,16 @@
 
 #define U_TAPPING_TERM 175
 
+#define BASE 0
+#define NAV 1
+#define SYMNUM 2
+#define FUN 3
+#define AUTO_MOUSE 4
+#define NUMBER 5
+#define SYMBOLS 6
+#define SCROLL 7
+#define SNIPE 8
+
 / {
     chosen { zmk,matrix_transform = &default_transform; };
 };
@@ -104,11 +114,11 @@
             >;
         };
 
-        AUTO-MOUSE {
+        AUTO_MOUSE {
             bindings = <
 &trans  &trans  &trans  &trans    &trans    &trans      &trans           &trans        &trans          &trans          &trans  &trans
-&trans  &trans  &trans  &trans    &trans    &trans      &msc SCRL_RIGHT  &msc SCRL_UP  &msc SCRL_DOWN  &msc SCRL_LEFT  &trans  &trans
-&trans  &trans  &trans  &trans    &trans    &mkp MB4    &mkp MB5         &trans        &trans          &trans          &trans  &trans
+&trans  &trans  &trans  &trans    &trans    &trans      &msc SCRL_RIGHT  &msc SCRL_UP  &msc SCRL_DOWN  &msc SCRL_LEFT  &trans  &trans  &trans  &trans
+&trans  &trans  &mo SCROLL  &mo SNIPE    &trans    &mkp MB4    &mkp MB5         &trans     &trans          &trans          &trans  &trans
                         &mkp MB2  &mkp MB1  &mkp MB3    &trans           &trans
             >;
         };
@@ -128,6 +138,24 @@
 &trans  &kp PIPE        &kp DOLLAR     &kp PERCENT           &kp CARET              &kp PLUS           &trans  &kp RSHFT  &kp RCTRL  &kp RALT  &kp RGUI  &trans
 &trans  &kp TILDE       &kp EXCL       &kp AT                &kp HASH               &kp COLON          &trans  &trans     &trans     &trans    &trans    &trans
                                        &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &kp UNDERSCORE     &trans  &trans
+            >;
+        };
+
+        SCROLL {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                        &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        SNIPE {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &mkp MB4  &mkp MB5  &tog 8  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                        &mkp MB2  &mkp MB1  &mkp MB3  &trans  &trans
             >;
         };
     };
