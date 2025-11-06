@@ -117,8 +117,8 @@
         AUTO_MOUSE {
             bindings = <
 &trans  &trans  &trans      &trans       &trans    &trans      &trans           &trans        &trans          &trans          &trans  &trans
-&trans  &trans  &trans      &trans       &trans    &trans      &msc SCRL_RIGHT  &msc SCRL_UP  &msc SCRL_DOWN  &msc SCRL_LEFT  &trans  &trans
-&trans  &trans  &mo SCROLL  &mo SNIPE    &trans    &mkp MB4    &mkp MB5         &trans        &trans          &trans          &trans  &trans
+&trans  &trans  &trans      &mo SCROLL   &mo SNIPE &trans      &msc SCRL_RIGHT  &msc SCRL_UP  &msc SCRL_DOWN  &msc SCRL_LEFT  &trans  &trans
+&trans  &trans  &trans      &trans       &trans    &mkp MB4    &mkp MB5         &trans        &trans          &trans          &trans  &trans
                         &mkp MB2  &mkp MB1  &mkp MB3    &trans           &trans
             >;
         };
