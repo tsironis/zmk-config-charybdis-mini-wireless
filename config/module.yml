@@ -1,0 +1,5 @@
+name: charybdis-config
+build:
+  cmake: .
+  kconfig: Kconfig
+  dts: .
