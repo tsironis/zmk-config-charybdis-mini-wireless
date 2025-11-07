@@ -1,6 +1,4 @@
-name: charybdis
+name: zmk-keyboards-charybdis
 build:
-  cmake: modules/charybdis
-  kconfig: modules/charybdis/Kconfig
   settings:
-    board_root: modules/charybdis
+    board_root: .
