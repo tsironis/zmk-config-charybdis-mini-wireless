@@ -3,4 +3,4 @@ build:
   cmake: modules/charybdis
   kconfig: modules/charybdis/Kconfig
   settings:
-    dts_root: .
+    dts_root: modules/charybdis
