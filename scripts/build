@@ -1,0 +1,56 @@
+#!/usr/bin/env python3
+"""
+West command to build Charybdis firmware
+"""
+
+import argparse
+import subprocess
+import sys
+from pathlib import Path
+
+def main():
+    parser = argparse.ArgumentParser(description='Build Charybdis firmware')
+    parser.add_argument('-b', '--board', required=True, help='Target board (e.g., nice_nano_v2)')
+    parser.add_argument('-s', '--shield', default='charybdis_left', help='Shield name')
+    parser.add_argument('-d', '--build-dir', help='Build directory')
+    parser.add_argument('-p', '--pristine', action='store_true', help='Pristine build')
+    
+    args = parser.parse_args()
+    
+    # Build the west command
+    cmd = ['west', 'build']
+    
+    if args.pristine:
+        cmd.append('-p')
+    
+    if args.build_dir:
+        cmd.extend(['-b', args.build_dir])
+    
+    cmd.extend(['-b', args.board])
+    
+    # Add shield
+    if args.shield:
+        cmd.append('--')
+        cmd.append(f'DT_SHIELD={args.shield}')
+    
+    # Add build directory
+    build_path = Path('build')
+    if args.build_dir:
+        build_path = Path(args.build_dir)
+    
+    cmd.append(str(build_path))
+    
+    print(f"Running: {' '.join(cmd)}")
+    
+    try:
+        result = subprocess.run(cmd, check=True)
+        return result.returncode
+    except subprocess.CalledProcessError as e:
+        print(f"Build failed with exit code {e.returncode}")
+        return e.returncode
+    except FileNotFoundError:
+        print("Error: 'west' command not found. Make sure ZMK is properly installed.")
+        return 1
+
+if __name__ == '__main__':
+    sys.exit(main())

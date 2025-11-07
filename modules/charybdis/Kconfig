@@ -1,0 +1,23 @@
+mainmenu "Charybdis Module Configuration"
+
+menu "Charybdis Shield Settings"
+    config CHARYBDIS
+        bool "Enable Charybdis shield support"
+        default y
+        help
+          Enable support for the Charybdis split keyboard shield.
+          
+    config CHARYBDIS_POINTING
+        bool "Enable pointing device support"
+        default y
+        depends on CHARYBDIS
+        help
+          Enable support for the pointing device (trackball/trackpad) on Charybdis.
+          
+    config CHARYBDIS_SPLIT
+        bool "Enable split keyboard support"
+        default y
+        depends on CHARYBDIS
+        help
+          Enable split keyboard functionality for Charybdis.
+endmenu

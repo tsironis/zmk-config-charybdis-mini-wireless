@@ -1,0 +1,5 @@
+west-commands:
+  - file: scripts/build
+    command: build
+    description: Build the Charybdis firmware
+    category: build

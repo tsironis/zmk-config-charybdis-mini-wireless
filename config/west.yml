@@ -17,3 +17,4 @@ manifest:
       revision: main
   self:
     path: config
+    west-commands: scripts/west-commands.yml
