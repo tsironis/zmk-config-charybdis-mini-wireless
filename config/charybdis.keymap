@@ -43,6 +43,7 @@
         CapsWord {
             bindings = <&caps_word>;
             key-positions = <17 18>;
+            timeout-ms = <5000>;
         };
 
         CAPS_LOCK {
@@ -141,19 +142,19 @@
 
         SCROLL {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                        &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans        &trans         &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans        &mo SNIPE      &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans        &trans         &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                                &mkp MB2      &mkp MB1  &mkp MB3  &trans  &trans
             >;
         };
 
         SNIPE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &mkp MB4  &mkp MB5  &tog 8  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                        &mkp MB2  &mkp MB1  &mkp MB3  &trans  &trans
+&trans  &trans        &trans        &trans         &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans        &trans        &trans         &trans  &trans  &mkp MB4  &mkp MB5  &tog 8  &trans  &trans  &trans
+&trans  &trans        &trans        &trans         &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                                &mkp MB2      &mkp MB1  &mkp MB3  &trans  &trans
             >;
         };
     };
