@@ -72,7 +72,7 @@ trackball: trackball@0 {
         
         scroll_mode {
             layers = <7>;
-            input-processors = <&zip_xy_scaler 1 2>,
+            input-processors = <&zip_xy_scaler 1 6>,
                                <&zip_xy_to_scroll_mapper>;
             process-next;
         };
