@@ -25,17 +25,17 @@
 
         LeftClickRight {
             bindings = <&mkp LCLK>;
-            key-positions = <15 14>;
+            key-positions = <28 27>;
         };
 
         RightClickRight {
             bindings = <&mkp RCLK>;
-            key-positions = <15 16>;
+            key-positions = <27 26>;
         };
 
         MiddleClickRight {
             bindings = <&mkp MCLK>;
-            key-positions = <13 14>;
+            key-positions = <25 26>;
         };
 
         CapsWord {
