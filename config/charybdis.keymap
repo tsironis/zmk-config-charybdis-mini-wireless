@@ -25,12 +25,12 @@
 
         LeftClickRight {
             bindings = <&mkp LCLK>;
-            key-positions = <15 16>;
+            key-positions = <15 14>;
         };
 
         RightClickRight {
             bindings = <&mkp RCLK>;
-            key-positions = <15 14>;
+            key-positions = <15 16>;
         };
 
         MiddleClickRight {
