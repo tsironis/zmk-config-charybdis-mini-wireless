@@ -75,8 +75,8 @@
 
         BASE {
             bindings = <
-&trans  &kp Q             &kp W             &kp F          &kp P               &kp B          &kp J        &kp L               &kp U          &kp Y              &kp SEMI           &trans
-&trans  &u_mt LEFT_GUI A  &u_mt LEFT_ALT R  &u_mt LCTRL S  &u_mt LEFT_SHIFT T  &kp G          &kp M        &u_mt LEFT_SHIFT N  &u_mt RCTRL E  &u_mt RIGHT_ALT I  &u_mt RIGHT_GUI O  &trans
+&mo 8   &kp Q             &kp W             &kp F          &kp P               &kp B          &kp J        &kp L               &kp U          &kp Y              &kp SEMI           &trans
+&mo 7   &u_mt LEFT_GUI A  &u_mt LEFT_ALT R  &u_mt LCTRL S  &u_mt LEFT_SHIFT T  &kp G          &kp M        &u_mt LEFT_SHIFT N  &u_mt RCTRL E  &u_mt RIGHT_ALT I  &u_mt RIGHT_GUI O  &trans
 &trans  &u_lt 4 Z         &kp X             &kp C          &kp D               &kp V          &kp K        &kp H               &kp COMMA      &kp DOT            &u_lt 4 FSLH       &trans
                                             &u_lt 3 ESC    &u_lt 2 SPACE       &u_lt 1 TAB    &u_lt 6 RET  &u_lt 5 BSPC
             >;
