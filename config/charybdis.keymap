@@ -23,17 +23,17 @@
     combos {
         compatible = "zmk,combos";
 
-        LeftClickRight {
+        LeftClickLeft {
             bindings = <&mkp LCLK>;
             key-positions = <28 27>;
         };
 
-        RightClickRight {
+        RightClickLeft {
             bindings = <&mkp RCLK>;
             key-positions = <27 26>;
         };
 
-        MiddleClickRight {
+        MiddleClickLeft {
             bindings = <&mkp MCLK>;
             key-positions = <25 26>;
         };
@@ -47,6 +47,21 @@
         CAPS_LOCK {
             bindings = <&kp CAPSLOCK>;
             key-positions = <5 6>;
+        };
+
+        LeftClickRight {
+            bindings = <&none>;
+            key-positions = <19 20>;
+        };
+
+        RightClickRight {
+            bindings = <&none>;
+            key-positions = <20 21>;
+        };
+
+        MiddleClickRight {
+            bindings = <&none>;
+            key-positions = <22 21>;
         };
     };
 
