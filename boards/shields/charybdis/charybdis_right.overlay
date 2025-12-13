@@ -43,39 +43,54 @@
     };
 };
 
+/* Configure the sensor on the SPI bus */
 &spi0 {
     status = "okay";
     compatible = "nordic,nrf-spim";
     pinctrl-0 = <&spi0_default>;
     pinctrl-1 = <&spi0_sleep>;
     pinctrl-names = "default", "sleep";
-    cs-gpios = <&gpio0 20 GPIO_ACTIVE_LOW>;
+    cs-gpios = <&gpio0 20 GPIO_ACTIVE_LOW>; /* CHECK YOUR PIN: This might be different for your wiring! */
 
-trackball: trackball@0 {
-        status = "okay";
-        compatible = "pixart,pmw3610";
+    trackball: trackball@0 {
+        compatible = "pixart,pmw3610-alt"; /* Use the 'alt' driver */
         reg = <0>;
         spi-max-frequency = <2000000>;
-        irq-gpios = <&gpio0 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-         /*   optional features   */
-        scroll-layers = <7>;
-        /* automouse-layer = <4>; */
-        snipe-layers = <8>;
+        irq-gpios = <&gpio0 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* CHECK YOUR PIN */
+        
+        /* EFFICIENCY SETTINGS */
+        /* Forces 4ms polling (250Hz) for smoother tracking */
+        force-awake-4ms-mode; 
+        
+        /* Adjust CPI (DPI) to preference */
+        cpi = <1200>;
+        
+        /* Orientation mappings (adjust as needed for your specific rotation) */
+        evt-type = <INPUT_EV_REL>;
+        x-input-code = <INPUT_REL_X>;
+        y-input-code = <INPUT_REL_Y>;
     };
 };
 
+/* Add the input listener at the root level */
 / {
-    trackball_listener: trackball_listener {
+    trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
         input-processors = <&zip_xy_scaler 2 1>;
-        
+
         scroll_mode {
             layers = <7>;
             input-processors = <&zip_xy_scaler 1 9>,
                                <&zip_xy_to_scroll_mapper>;
             process-next;
         };
+        /* Optional: Scale output (X, Y). Increase for speed, decrease for precision */
+        /* swap-xy; */
+        /* invert-y; */
+        /* invert-x; */
+        /* scale-multiplier = <1>; */
+        /* scale-divisor = <1>; */
     };
 };
 
