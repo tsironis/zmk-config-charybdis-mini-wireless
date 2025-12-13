@@ -61,9 +61,11 @@
         /* EFFICIENCY SETTINGS */
         /* Forces 4ms polling (250Hz) for smoother tracking */
         force-awake-4ms-mode; 
-        
+        swap-xy;
+        invert-y;
+        invert-x;
         /* Adjust CPI (DPI) to preference */
-        cpi = <1200>;
+        cpi = <800>;
         
         /* Orientation mappings (adjust as needed for your specific rotation) */
         evt-type = <INPUT_EV_REL>;
@@ -86,11 +88,9 @@
             process-next;
         };
         /* Optional: Scale output (X, Y). Increase for speed, decrease for precision */
-        /* swap-xy; */
-        /* invert-y; */
-        /* invert-x; */
-        /* scale-multiplier = <1>; */
-        /* scale-divisor = <1>; */
+        scale-multiplier = <1>;
+        scale-divisor = <1>;
+        
     };
 };
 
