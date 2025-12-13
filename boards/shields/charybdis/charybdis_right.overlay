@@ -66,6 +66,8 @@
         invert-x;
         /* Adjust CPI (DPI) to preference */
         cpi = <800>;
+        /* scale-multiplier = <1>; */
+        /* scale-divisor = <1>; */
         
         /* Orientation mappings (adjust as needed for your specific rotation) */
         evt-type = <INPUT_EV_REL>;
@@ -88,8 +90,6 @@
             process-next;
         };
         /* Optional: Scale output (X, Y). Increase for speed, decrease for precision */
-        scale-multiplier = <1>;
-        scale-divisor = <1>;
         
     };
 };
