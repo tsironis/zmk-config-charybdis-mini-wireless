@@ -50,17 +50,17 @@
         };
 
         LeftClickRight {
-            bindings = <&none>;
+            bindings = <&mkp LCLK>;
             key-positions = <19 20>;
         };
 
         RightClickRight {
-            bindings = <&none>;
+            bindings = <&mkp RCLK>;
             key-positions = <20 21>;
         };
 
         MiddleClickRight {
-            bindings = <&none>;
+            bindings = <&mkp MCLK>;
             key-positions = <22 21>;
         };
     };
