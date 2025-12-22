@@ -65,7 +65,7 @@
         invert-y;
         invert-x;
         /* Adjust CPI (DPI) to preference */
-        cpi = <200>;
+        cpi = <400>;
         /* scale-multiplier = <1>; */
         /* scale-divisor = <1>; */
         
@@ -81,11 +81,10 @@
     trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        input-processors = <&zip_xy_scaler 2 1>;
 
         scroll_mode {
             layers = <7>;
-            input-processors = <&zip_xy_scaler 1 9>,
+            input-processors = <&zip_xy_scaler 1 24>,
                                <&zip_xy_to_scroll_mapper>;
             process-next;
         };
