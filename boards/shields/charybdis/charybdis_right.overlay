@@ -65,7 +65,7 @@
         invert-y;
         invert-x;
         /* Adjust CPI (DPI) to preference */
-        cpi = <400>;
+        cpi = <200>;
         /* scale-multiplier = <1>; */
         /* scale-divisor = <1>; */
         
