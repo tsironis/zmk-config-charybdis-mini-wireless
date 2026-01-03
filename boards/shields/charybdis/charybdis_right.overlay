@@ -53,6 +53,7 @@
     cs-gpios = <&gpio0 20 GPIO_ACTIVE_LOW>; /* CHECK YOUR PIN: This might be different for your wiring! */
 
     trackball: trackball@0 {
+        status = "okay";
         compatible = "pixart,pmw3610-alt"; /* Use the 'alt' driver */
         reg = <0>;
         spi-max-frequency = <2000000>;
@@ -60,12 +61,13 @@
         
         /* EFFICIENCY SETTINGS */
         /* Forces 4ms polling (250Hz) for smoother tracking */
-        force-awake-4ms-mode; 
+        force-awake;
+        /* force-awake-4ms-mode;  */
         swap-xy;
         invert-y;
         invert-x;
         /* Adjust CPI (DPI) to preference */
-        cpi = <200>;
+        cpi = <400>;
         /* scale-multiplier = <1>; */
         /* scale-divisor = <1>; */
         
