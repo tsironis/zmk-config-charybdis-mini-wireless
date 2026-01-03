@@ -4,12 +4,11 @@
     chosen {
         zmk,kscan = &kscan0;
         zmk,matrix_transform = &default_transform;
-    }; 
-
+    };
     vbatt: vbatt {
 	compatible = "zmk,battery-nrf-vddh";
     };
-          
+
     default_transform: keymap_transform_0 {
         compatible = "zmk,matrix-transform";
         columns = <12>;
@@ -47,10 +46,5 @@
 			, <&pro_micro 4 GPIO_ACTIVE_HIGH>
 			, <&pro_micro 9 GPIO_ACTIVE_HIGH>
             ;
-    };
-
-    soft_off_wakers {
-        compatible = "zmk,soft-off-wakeup-sources";
-        wakeup-sources = <&kscan0>;
     };
 };
