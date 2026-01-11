@@ -15,6 +15,11 @@
 #define SCROLL 7
 #define SNIPE 8
 
+// Key position definitions for smart hold-tap triggers
+#define KEYS_L 0 1 2 3 4 5 12 13 14 15 16 17 24 25 26 27 28 29 36 37 38
+#define KEYS_R 6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 34 35 39 40
+#define THUMBS 36 37 38 39 40
+
 / {
     chosen { zmk,matrix_transform = &default_transform; };
 };
@@ -66,12 +71,40 @@
     };
 
     behaviors {
+        // Universal hold-tap (for non-homerow mods)
         u_mt: u_mt {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <U_TAPPING_TERM>;
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
+        };
+
+        // Left-hand homerow mods - only trigger when RIGHT hand is pressed
+        // Following 280Zo optimization: https://github.com/280Zo/charybdis-wireless-mini-zmk-firmware
+        hm_left: hm_left {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <160>;
+            require-prior-idle-ms = <65>;
+            retro-tap;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <KEYS_R THUMBS>;
+        };
+
+        // Right-hand homerow mods - only trigger when LEFT hand is pressed
+        hm_right: hm_right {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <160>;
+            require-prior-idle-ms = <55>;
+            retro-tap;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <KEYS_L THUMBS>;
         };
 
         u_lt: u_lt {
@@ -90,10 +123,10 @@
 
         BASE {
             bindings = <
-&mo 8   &kp Q             &kp W             &kp F          &kp P               &kp B          &kp J        &kp L               &kp U          &kp Y              &kp SEMI           &trans
-&mo 7   &u_mt LEFT_GUI A  &u_mt LEFT_ALT R  &u_mt LCTRL S  &u_mt LEFT_SHIFT T  &kp G          &kp M        &u_mt LEFT_SHIFT N  &u_mt RCTRL E  &u_mt RIGHT_ALT I  &u_mt RIGHT_GUI O  &trans
-&trans  &u_lt 4 Z         &kp X             &kp C          &kp D               &kp V          &kp K        &kp H               &kp COMMA      &kp DOT            &u_lt 4 FSLH       &trans
-                                            &u_lt 3 ESC    &u_lt 2 SPACE       &u_lt 1 TAB    &u_lt 6 RET  &u_lt 5 BSPC
+&mo 8   &kp Q               &kp W               &kp F            &kp P               &kp B          &kp J        &kp L               &kp U          &kp Y              &kp SEMI           &trans
+&mo 7   &hm_left LEFT_GUI A  &hm_left LEFT_ALT R  &hm_left LCTRL S  &hm_left LEFT_SHIFT T  &kp G          &kp M        &hm_right LEFT_SHIFT N  &hm_right RCTRL E  &hm_right RIGHT_ALT I  &hm_right RIGHT_GUI O  &trans
+&trans  &u_lt 4 Z           &kp X               &kp C            &kp D               &kp V          &kp K        &kp H               &kp COMMA      &kp DOT            &u_lt 4 FSLH       &trans
+                                                  &u_lt 3 ESC      &u_lt 2 SPACE       &u_lt 1 TAB    &u_lt 6 RET  &u_lt 5 BSPC
             >;
         };
 
