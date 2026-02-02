@@ -89,10 +89,10 @@
 
         BASE {
             bindings = <
-&mo SNIPE   &kp Q             &kp W             &kp F          &kp P               &kp B          &kp J        &kp L               &kp U          &kp Y              &kp SEMI           &trans
-&mo SCROLL   &u_mt LEFT_GUI A  &u_mt LEFT_ALT R  &u_mt LCTRL S  &u_mt LEFT_SHIFT T  &kp G          &kp M        &u_mt LEFT_SHIFT N  &u_mt RCTRL E  &u_mt RIGHT_ALT I  &u_mt RIGHT_GUI O  &trans
-&trans  &u_lt NUMBER Z         &kp X             &kp C          &kp D               &kp V          &kp K        &kp H               &kp COMMA      &kp DOT            &u_lt FUN FSLH       &trans
-                                            &u_lt FUN ESC    &u_lt SYMNUM SPACE       &u_lt NAV TAB    &u_lt SYMBOLS RET  &u_lt NUMBER BSPC
+&mo 6   &kp Q             &kp W             &kp F          &kp P               &kp B            &kp J              &kp L               &kp U          &kp Y              &kp SEMI           &trans
+&mo 7   &u_mt LEFT_GUI A  &u_mt LEFT_ALT R  &u_mt LCTRL S  &u_mt LEFT_SHIFT T  &kp G            &kp M              &u_mt LEFT_SHIFT N  &u_mt RCTRL E  &u_mt RIGHT_ALT I  &u_mt RIGHT_GUI O  &trans
+&trans  &u_lt NUMBER Z    &kp X             &kp C          &kp D               &kp V            &kp K              &kp H               &kp COMMA      &kp DOT            &u_lt FUN FSLH     &trans
+                                            &u_lt FUN ESC  &u_lt SYMNUM SPACE  &u_lt NAV TAB    &u_lt SYMBOLS RET  &u_lt NUMBER BSPC
             >;
         };
 
@@ -144,24 +144,26 @@
         // SCROLL: Dedicated scroll wheel layer with mouse button access
         // Activated via &mo SCROLL on BASE layer (left thumb key)
         // Provides quick access to scroll directions and SNIPE layer
+
         SCROLL {
             bindings = <
-&trans  &trans  &trans  &trans     &trans    &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &mo SNIPE  &trans    &trans      &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans     &trans    &trans      &trans  &trans  &trans  &trans  &trans  &trans
-                        &mkp MB2   &mkp MB1  &mkp MB3    &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+                        &trans  &trans  &trans    &trans  &trans
             >;
         };
 
         // SNIPE: Gaming/mouse layer with quick-access to mouse buttons and scroll controls
         // Activated via &mo SNIPE on BASE layer (top-left key)
         // Can be toggled on with &tog SNIPE within the layer itself
+
         SNIPE {
             bindings = <
-&trans  &trans  &trans  &trans        &trans        &trans      &msc SCRL_RIGHT  &msc SCRL_UP  &msc SCRL_DOWN  &msc SCRL_LEFT  &tog SNIPE  &trans
-&trans  &trans  &trans  &trans        &trans        &trans      &mkp MB4         &mkp MB5      &tog SNIPE       &trans          &trans      &trans
-&trans  &trans  &trans  &trans        &trans        &trans      &trans          &trans       &trans          &trans          &trans      &trans
-                        &mkp MB2     &mkp MB1      &mkp MB3    &trans           &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
+                        &trans  &trans  &trans    &trans  &trans
             >;
         };
     };
