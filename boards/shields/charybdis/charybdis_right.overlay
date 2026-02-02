@@ -84,8 +84,16 @@
         compatible = "zmk,input-listener";
         device = <&trackball>;
 
-        scroll_mode {
+        /* SNIPE mode: Reduced cursor speed (33%) for precision aiming/gaming */
+        snipe_mode {
             layers = <7>;
+            input-processors = <&zip_xy_scaler 1 3>;
+            process-next;
+        };
+
+        /* SCROLL mode: Convert trackball movement to scroll wheel */
+        scroll_mode {
+            layers = <6>;
             input-processors = <&zip_xy_scaler 1 24>,
                                <&zip_xy_to_scroll_mapper>;
             process-next;

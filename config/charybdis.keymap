@@ -9,11 +9,10 @@
 #define NAV 1
 #define SYMNUM 2
 #define FUN 3
-#define AUTO_MOUSE 4
-#define NUMBER 5
-#define SYMBOLS 6
-#define SCROLL 7
-#define SNIPE 8
+#define NUMBER 4
+#define SYMBOLS 5
+#define SCROLL 6
+#define SNIPE 7
 
 / {
     chosen { zmk,matrix_transform = &default_transform; };
@@ -90,10 +89,10 @@
 
         BASE {
             bindings = <
-&mo 8   &kp Q             &kp W             &kp F          &kp P               &kp B          &kp J        &kp L               &kp U          &kp Y              &kp SEMI           &trans
-&mo 7   &u_mt LEFT_GUI A  &u_mt LEFT_ALT R  &u_mt LCTRL S  &u_mt LEFT_SHIFT T  &kp G          &kp M        &u_mt LEFT_SHIFT N  &u_mt RCTRL E  &u_mt RIGHT_ALT I  &u_mt RIGHT_GUI O  &trans
-&trans  &u_lt 4 Z         &kp X             &kp C          &kp D               &kp V          &kp K        &kp H               &kp COMMA      &kp DOT            &u_lt 4 FSLH       &trans
-                                            &u_lt 3 ESC    &u_lt 2 SPACE       &u_lt 1 TAB    &u_lt 6 RET  &u_lt 5 BSPC
+&mo SNIPE   &kp Q             &kp W             &kp F          &kp P               &kp B          &kp J        &kp L               &kp U          &kp Y              &kp SEMI           &trans
+&mo SCROLL   &u_mt LEFT_GUI A  &u_mt LEFT_ALT R  &u_mt LCTRL S  &u_mt LEFT_SHIFT T  &kp G          &kp M        &u_mt LEFT_SHIFT N  &u_mt RCTRL E  &u_mt RIGHT_ALT I  &u_mt RIGHT_GUI O  &trans
+&trans  &u_lt NUMBER Z         &kp X             &kp C          &kp D               &kp V          &kp K        &kp H               &kp COMMA      &kp DOT            &u_lt FUN FSLH       &trans
+                                            &u_lt FUN ESC    &u_lt SYMNUM SPACE       &u_lt NAV TAB    &u_lt SYMBOLS RET  &u_lt NUMBER BSPC
             >;
         };
 
@@ -124,15 +123,6 @@
             >;
         };
 
-        AUTO_MOUSE {
-            bindings = <
-&trans  &trans  &trans  &trans      &trans     &trans      &trans           &trans        &trans          &trans          &trans  &trans
-&trans  &trans  &trans  &mo SCROLL  &mo SNIPE  &trans      &msc SCRL_RIGHT  &msc SCRL_UP  &msc SCRL_DOWN  &msc SCRL_LEFT  &trans  &trans
-&trans  &trans  &trans  &trans      &trans     &mkp MB4    &mkp MB5         &trans        &trans          &trans          &trans  &trans
-                        &mkp MB2    &mkp MB1   &mkp MB3    &trans           &trans
-            >;
-        };
-
         NUMBER {
             bindings = <
 &trans  &kp LEFT_BRACKET  &kp N7  &kp N8   &kp N9  &kp RIGHT_BRACKET    &trans  &trans     &trans     &trans         &trans         &trans
@@ -151,6 +141,9 @@
             >;
         };
 
+        // SCROLL: Dedicated scroll wheel layer with mouse button access
+        // Activated via &mo SCROLL on BASE layer (left thumb key)
+        // Provides quick access to scroll directions and SNIPE layer
         SCROLL {
             bindings = <
 &trans  &trans  &trans  &trans     &trans    &trans      &trans  &trans  &trans  &trans  &trans  &trans
@@ -160,12 +153,15 @@
             >;
         };
 
+        // SNIPE: Gaming/mouse layer with quick-access to mouse buttons and scroll controls
+        // Activated via &mo SNIPE on BASE layer (top-left key)
+        // Can be toggled on with &tog SNIPE within the layer itself
         SNIPE {
             bindings = <
-&trans  &trans  &trans  &trans    &trans    &trans      &trans    &trans    &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans    &trans    &trans      &mkp MB4  &mkp MB5  &tog 8  &trans  &trans  &trans
-&trans  &trans  &trans  &trans    &trans    &trans      &trans    &trans    &trans  &trans  &trans  &trans
-                        &mkp MB2  &mkp MB1  &mkp MB3    &trans    &trans
+&trans  &trans  &trans  &trans        &trans        &trans      &msc SCRL_RIGHT  &msc SCRL_UP  &msc SCRL_DOWN  &msc SCRL_LEFT  &tog SNIPE  &trans
+&trans  &trans  &trans  &trans        &trans        &trans      &mkp MB4         &mkp MB5      &tog SNIPE       &trans          &trans      &trans
+&trans  &trans  &trans  &trans        &trans        &trans      &trans          &trans       &trans          &trans          &trans      &trans
+                        &mkp MB2     &mkp MB1      &mkp MB3    &trans           &trans
             >;
         };
     };
