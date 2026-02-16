@@ -4,7 +4,16 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/pointing.h>
 
-#define U_TAPPING_TERM 175
+#define U_TAPPING_TERM 200
+#define U_QUICK_TAP 150
+#define U_REQUIRE_PRIOR_IDLE 100
+
+// Key position ranges for hold-trigger-key-positions
+// Left hand: columns 0-5 (positions 0-11, 24-28)
+// Right hand: columns 6-11 (positions 12-23, 29-34)
+#define LEFT_HAND_KEYS 0 1 2 3 4 5 6 7 8 9 10 11 24 25 26 27 28
+#define RIGHT_HAND_KEYS 12 13 14 15 16 17 18 19 20 21 22 23 29 30 31 32 33 34
+#define THUMB_KEYS 24 25 26 27 28 29 30 31 32 33 34
 #define BASE 0
 #define NAV 1
 #define SYMNUM 2
@@ -79,18 +88,20 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <U_TAPPING_TERM>;
-            flavor = "tap-preferred";
+            quick-tap-ms = <U_QUICK_TAP>;
+            require-prior-idle-ms = <U_REQUIRE_PRIOR_IDLE>;
+            flavor = "balanced";
             bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <RIGHT_HAND_KEYS THUMB_KEYS>;
         };
 
         u_lt: u_lt {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <U_TAPPING_TERM>;
-            flavor = "tap-preferred";
+            flavor = "balanced";
             bindings = <&mo>, <&kp>;
-
-            quick-tap-ms = <U_TAPPING_TERM>;
+            quick-tap-ms = <U_QUICK_TAP>;
         };
     };
 
