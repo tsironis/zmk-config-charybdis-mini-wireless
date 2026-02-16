@@ -62,6 +62,16 @@
             bindings = <&mkp MCLK>;
             key-positions = <33 34>;
         };
+
+        Back {
+            bindings = <&mkp MB4>;
+            key-positions = <1 2>;
+        };
+
+        Forward {
+            bindings = <&mkp MB5>;
+            key-positions = <10 9>;
+        };
     };
 
     behaviors {
