@@ -57,7 +57,7 @@
         compatible = "pixart,pmw3610-alt"; /* Use the 'alt' driver */
         reg = <0>;
         spi-max-frequency = <2000000>;
-        irq-gpios = <&gpio0 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; /* CHECK YOUR PIN */
+        irq-gpios = <&gpio0 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         
         /* EFFICIENCY SETTINGS */
         /* Forces 4ms polling (250Hz) for smoother tracking */
@@ -67,7 +67,7 @@
         invert-y;
         invert-x;
         /* Adjust CPI (DPI) to preference */
-        cpi = <400>;
+        cpi = <800>;
         /* scale-multiplier = <1>; */
         /* scale-divisor = <1>; */
         
@@ -94,7 +94,7 @@
         /* SCROLL mode: Convert trackball movement to scroll wheel */
         scroll_mode {
             layers = <6>;
-            input-processors = <&zip_xy_scaler 1 24>,
+            input-processors = <&zip_xy_scaler 1 8>,
                                <&zip_xy_to_scroll_mapper>;
             process-next;
         };

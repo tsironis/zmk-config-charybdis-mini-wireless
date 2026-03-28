@@ -1,5 +1,15 @@
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
+  meta:
+    runs-on: ubuntu-latest
+    outputs:
+      sha: ${{ steps.sha.outputs.short }}
+    steps:
+      - id: sha
+        run: echo "short=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
   build:
+    needs: meta
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    with:
+      archive_name: firmware-${{ needs.meta.outputs.sha }}
