@@ -60,7 +60,6 @@
         irq-gpios = <&gpio0 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         
         /* EFFICIENCY SETTINGS */
-        /* Forces 4ms polling (250Hz) for smoother tracking */
         force-awake;
         /* force-awake-4ms-mode;  */
         swap-xy;
