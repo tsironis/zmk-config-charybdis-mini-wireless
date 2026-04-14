@@ -54,22 +54,14 @@
 
     trackball: trackball@0 {
         status = "okay";
-        compatible = "pixart,pmw3610-alt"; /* Use the 'alt' driver */
+        compatible = "pixart,pmw3610";
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio0 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        /* force-awake removed: lets sensor manage REST→RUN transitions naturally,
-         * avoids SPI writes on wake that can trigger stale motion reads */
-        /* force-awake-4ms-mode;  */
-        swap-xy;
-        invert-y;
-        invert-x;
-        /* Adjust CPI (DPI) to preference */
+        xy-swap;
+        y-invert;
+        x-invert;
         cpi = <800>;
-        /* scale-multiplier = <1>; */
-        /* scale-divisor = <1>; */
-        
-        /* Orientation mappings (adjust as needed for your specific rotation) */
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
         y-input-code = <INPUT_REL_Y>;
