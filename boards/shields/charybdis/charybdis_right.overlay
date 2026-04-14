@@ -58,7 +58,8 @@
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&gpio0 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        force-awake;
+        /* force-awake removed: lets sensor manage REST→RUN transitions naturally,
+         * avoids SPI writes on wake that can trigger stale motion reads */
         /* force-awake-4ms-mode;  */
         swap-xy;
         invert-y;
