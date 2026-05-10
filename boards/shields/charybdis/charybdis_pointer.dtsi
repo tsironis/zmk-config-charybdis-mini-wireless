@@ -1,0 +1,30 @@
+/*
+ * Charybdis Trackball Input Processor Configuration
+ *
+ * Adjust pointer speed, scroll behavior, and snipe sensitivity here.
+ * Hardware wiring stays in charybdis_right.overlay.
+ */
+
+#include <input/processors.dtsi>
+
+/ {
+    trackball_listener {
+        compatible = "zmk,input-listener";
+        device = <&trackball>;
+
+        /* SNIPE mode: Reduced cursor speed (33%) for precision aiming/gaming */
+        snipe_mode {
+            layers = <7>;
+            input-processors = <&zip_xy_scaler 1 3>;
+            process-next;
+        };
+
+        /* SCROLL mode: Convert trackball movement to scroll wheel */
+        scroll_mode {
+            layers = <6>;
+            input-processors = <&zip_xy_scaler 1 8>,
+                               <&zip_xy_to_scroll_mapper>;
+            process-next;
+        };
+    };
+};
