@@ -10,6 +10,6 @@ jobs:
         run: echo "short=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
   build:
     needs: meta
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@ead91ca094c6
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@ead91ca094c6cd778574f73b9ae011ddab611c66
     with:
       archive_name: firmware-${{ needs.meta.outputs.sha }}
