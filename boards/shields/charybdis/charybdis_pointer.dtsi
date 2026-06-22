@@ -19,10 +19,14 @@
             process-next;
         };
 
-        /* SCROLL mode: Convert trackball movement to scroll wheel */
+        /* SCROLL mode: Convert trackball movement to scroll wheel.
+         * Divisor lowered from 8 -> 2 because smooth scrolling (see
+         * charybdis_right.conf) makes each wheel unit a fraction of a notch,
+         * so more units are needed for usable speed. Tune this divisor on
+         * hardware: higher = gentler/slower, lower = faster. */
         scroll_mode {
             layers = <6>;
-            input-processors = <&zip_xy_scaler 1 8>,
+            input-processors = <&zip_xy_scaler 1 2>,
                                <&zip_xy_to_scroll_mapper>;
             process-next;
         };
