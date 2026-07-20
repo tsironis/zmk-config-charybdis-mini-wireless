@@ -13,9 +13,12 @@
 #
 ---
 include:
+  # SLEEP-DEBUG branch: zmk-usb-logging snippet provides the CDC-ACM console
   - board: nice_nano//zmk
     shield: charybdis_left
+    snippet: zmk-usb-logging
   - board: nice_nano//zmk
     shield: charybdis_right
+    snippet: zmk-usb-logging
   - board: nice_nano//zmk
     shield: settings_reset
