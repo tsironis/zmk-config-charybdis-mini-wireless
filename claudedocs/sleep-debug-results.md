@@ -34,7 +34,12 @@ experiments are re-run.
 | 12 | `12-culprit-v7` | `b54df4c` | `fc84cc9` | identify culprit thread via GPREGRET2 | unknown |
 | 13 | `13-culprit-v8` | `b54df4c` | `a53d0d7` | write GPREGRET2 first in the WDT callback | unknown |
 | 14 | `14-sentinel-v9` | `b54df4c` | `ae9bf15` | 0xDD/0xEE sentinel: retention-lost vs callback-never-fired | unknown |
-| 15 | `15-driver-pm-bisect` | *pending* | `ae9bf15` | PMW3610 driver pinned to `0df27a9` — our PM/IRQ changes reverted, trackball present | pending |
+| 15 | `15-driver-pm-bisect` | `1fc25a1` | `ae9bf15` | PMW3610 driver pinned to `0df27a9` — our PM/IRQ changes reverted, trackball present | built, awaiting hardware test |
+
+Experiment 15 built as CI run `31367312168`; pins verified in the log (zephyr `9df4b12b`,
+driver `0df27a9`). Artifacts in `build/sleep-debug/15-driver-pm-bisect/firmware-1fc25a1/`.
+The reverted driver compiles — the file-scope `PM_DEVICE_DT_INST_DEFINE(n, …)` with unbound `n`
+is accepted, which is consistent with it having shipped that way for months.
 
 ## Experiment 15 — the current hypothesis
 
