@@ -34,7 +34,8 @@ experiments are re-run.
 | 12 | `12-culprit-v7` | `b54df4c` | `fc84cc9` | identify culprit thread via GPREGRET2 | unknown |
 | 13 | `13-culprit-v8` | `b54df4c` | `a53d0d7` | write GPREGRET2 first in the WDT callback | unknown |
 | 14 | `14-sentinel-v9` | `b54df4c` | `ae9bf15` | 0xDD/0xEE sentinel: retention-lost vs callback-never-fired | unknown |
-| 15 | `15-driver-pm-bisect` | `1fc25a1` | `ae9bf15` | PMW3610 driver pinned to `0df27a9` — our PM/IRQ changes reverted, trackball present | built, awaiting hardware test |
+| 15 | `15-driver-pm-bisect` | `1fc25a1` | `ae9bf15` | PMW3610 driver pinned to `0df27a9` — **full** revert of `b447408` | **CONFOUNDED — froze during use, evidence lost to power-cycle** |
+| 15b | `15b-driver-pm-only` | *pending* | `ae9bf15` | driver pinned to `dcff8f6` — PM registration + PM-path IRQ removed, rate-limiting kept | pending |
 
 Experiment 15 built as CI run `31367312168`; pins verified in the log (zephyr `9df4b12b`,
 driver `0df27a9`). Artifacts in `build/sleep-debug/15-driver-pm-bisect/firmware-1fc25a1/`.
@@ -65,6 +66,31 @@ suspect — an SPI transaction racing the deep-sleep transition can block on the
 **Read:** clean sleep/wake ⇒ our PM code is the cause, bisect items 1/2/3 individually.
 Still deadlocks ⇒ driver exonerated; next axis is split BLE / central role, and experiment 2
 becomes the one to re-run.
+
+## Experiment 15 post-mortem (2026-08-11)
+
+Froze **during active use**, not during sleep. Console after reboot showed a cold boot with no
+evidence: `RESETREAS=0x00000000` (no bits — power-on reset, not `RESETPIN` or `DOG`),
+`sleep_bc=0x00000000 wdt_ev=0x00000000` (noinit zeroed), `boot #1`, `GPREGRET=0x00` (not the
+`0xDD` sentinel). The board was power-cycled, which is the one reset type that clears GPREGRET
+and noinit RAM.
+
+Two things still follow:
+
+1. **The revert was too broad.** `b447408` bundled four changes; `0df27a9` reverted all of them,
+   including "restore report interval rate-limiting for BLE HID queue management".
+   `charybdis_right.conf:18` sets `CONFIG_PMW3610_REPORT_INTERVAL_MIN=12`, but experiment 15 has
+   no code reading it — so the trackball reported at full interrupt rate into the BLE HID queue.
+   That is the flooding path `charybdis.conf:8-12` blames for
+   `bt_l2cap_create_pdu_timeout(K_FOREVER)`. The freeze is plausibly self-inflicted; the run
+   tells us nothing about sleep. Experiment 15b narrows the change to PM only.
+2. **The watchdog did not fire.** Recovery required manual intervention. If the fork's WDT is
+   armed and fed from the system workqueue as `charybdis.conf:44-46` describes, the system WQ was
+   still running, so this wedge is not system-WQ starvation — it points at the BLE TX / L2CAP
+   path. *Unverified:* that the WDT is actually armed at boot. Confirm before leaning on this.
+
+**On freeze, press the reset button once — do not pull power.** GPREGRET and noinit RAM survive a
+pin reset; neither survives a POR. Avoid double-tapping (that enters the bootloader).
 
 ## Protocol
 

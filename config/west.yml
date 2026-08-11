@@ -12,10 +12,12 @@ manifest:
       import: app/west.yml
     - name: zmk-pmw3610-driver
       remote: tsironis
-      # EXPERIMENT 15: b8ecaea with b447408 ("Fix wake warp") reverted, i.e. the
-      # driver is NOT registered with Zephyr device PM. Isolates our PM/IRQ sleep
-      # path with the trackball still present. Revert to `main` after the run.
-      revision: 0df27a9cd628848437e17965e3f662f6255f7be0
+      # EXPERIMENT 15b: b8ecaea with ONLY the PM device registration and the
+      # PM-path IRQ calls removed. Keeps CONFIG_PMW3610_REPORT_INTERVAL_MIN
+      # rate-limiting (=12 in charybdis_right.conf), which experiment 15's full
+      # revert of b447408 dropped, flooding the BLE HID queue. Isolates our PM
+      # sleep path with the trackball present. Revert to `main` after the run.
+      revision: dcff8f622a68d878e5effd22ed94e86949e349df
 
   self:
     path: config
