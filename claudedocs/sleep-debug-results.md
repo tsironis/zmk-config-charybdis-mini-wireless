@@ -35,7 +35,7 @@ experiments are re-run.
 | 13 | `13-culprit-v8` | `b54df4c` | `a53d0d7` | write GPREGRET2 first in the WDT callback | unknown |
 | 14 | `14-sentinel-v9` | `b54df4c` | `ae9bf15` | 0xDD/0xEE sentinel: retention-lost vs callback-never-fired | unknown |
 | 15 | `15-driver-pm-bisect` | `1fc25a1` | `ae9bf15` | PMW3610 driver pinned to `0df27a9` — **full** revert of `b447408` | **CONFOUNDED — froze during use, evidence lost to power-cycle** |
-| 15b | `15b-driver-pm-only` | *pending* | `ae9bf15` | driver pinned to `dcff8f6` — PM registration + PM-path IRQ removed, rate-limiting kept | pending |
+| 15b | `15b-driver-pm-only` | `a68032f` | `ae9bf15` | driver pinned to `dcff8f6` — PM registration + PM-path IRQ removed, rate-limiting kept | pending |
 
 Experiment 15 built as CI run `31367312168`; pins verified in the log (zephyr `9df4b12b`,
 driver `0df27a9`). Artifacts in `build/sleep-debug/15-driver-pm-bisect/firmware-1fc25a1/`.
