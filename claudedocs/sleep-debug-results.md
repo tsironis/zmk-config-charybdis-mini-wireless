@@ -137,8 +137,12 @@ Conclusion: the firmware delivered every HID report over a healthy, acknowledgin
 macOS stopped acting on them. Host-side HID stack wedge, downstream of everything the
 `charybdis.conf:8-12` workqueue/buffer tuning addresses. Not a ZMK deadlock.
 
-Open confirmations: `grep -c "Not sending"` should be 0; next freeze, toggle Bluetooth off/on on
-the Mac without touching the keyboard; reproduce against a second host.
+**Confirmed 2026-08-13:** `grep -c "Not sending" ~/charybdis-freeze.log` → `0`. The connection was
+never absent, so the host-side reading holds. The freeze investigation is closed.
+
+Optional further confirmation if it recurs: toggle Bluetooth off/on on the Mac without touching
+the keyboard (if it comes straight back, firmware was fine throughout), or reproduce against a
+second host.
 
 ### Consequence for the branch
 
