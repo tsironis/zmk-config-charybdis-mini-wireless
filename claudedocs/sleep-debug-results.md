@@ -35,7 +35,8 @@ experiments are re-run.
 | 13 | `13-culprit-v8` | `b54df4c` | `a53d0d7` | write GPREGRET2 first in the WDT callback | unknown |
 | 14 | `14-sentinel-v9` | `b54df4c` | `ae9bf15` | 0xDD/0xEE sentinel: retention-lost vs callback-never-fired | unknown |
 | 15 | `15-driver-pm-bisect` | `1fc25a1` | `ae9bf15` | PMW3610 driver pinned to `0df27a9` — **full** revert of `b447408` | **CONFOUNDED — froze during use, evidence lost to power-cycle** |
-| 15b | `15b-driver-pm-only` | `a68032f` | `ae9bf15` | driver pinned to `dcff8f6` — PM registration + PM-path IRQ removed, rate-limiting kept | pending |
+| 15b | `15b-driver-pm-only` | `a68032f` | `ae9bf15` | driver pinned to `dcff8f6` — PM registration + PM-path IRQ removed, rate-limiting kept | froze during use; evidence lost to pin reset |
+| 15c | `15c-live-capture` | `f7bf916` | `ae9bf15` | 15b + `&out` bindings, tethered live capture on BLE | **decisive — see post-mortem below** |
 
 Experiment 15 built as CI run `31367312168`; pins verified in the log (zephyr `9df4b12b`,
 driver `0df27a9`). Artifacts in `build/sleep-debug/15-driver-pm-bisect/firmware-1fc25a1/`.
@@ -91,6 +92,59 @@ Two things still follow:
 
 **On freeze, press the reset button once — do not pull power.** GPREGRET and noinit RAM survive a
 pin reset; neither survives a POR. Avoid double-tapping (that enters the bootloader).
+
+## Experiment 15c — live capture (2026-08-13)
+
+Tethered central on USB with HID forced to BLE via `&out OUT_BLE`, `<dbg>` logging to file for
+~2 h 23 m. Froze during typing. This run answered more than 6–15 combined.
+
+### Retention is dead on this board — post-mortem instrumentation cannot work
+
+A boot with `RESETREAS=0x00010002` (`OFF | DOG`) — i.e. the watchdog reset the SoC *itself*, the
+exact self-initiated reset the breadcrumb design was waiting for — still reported
+`sleep_bc=0x00000000`, `wdt_ev=0x00000000`, `GPREGRET=0x00` instead of the `0xDD` sentinel.
+So it is not "the WDT callback never ran": **nothing survives a reset here**, presumably the
+nice!nano bootloader clearing RAM and GPREGRET. Experiments 6–15 were structurally incapable of
+reporting. Only live capture works.
+
+RESETREAS itself *is* trustworthy — 15b produced a clean single-bit `RESETPIN`, proving the
+write-1-to-clear in `sleep_debug_init` works.
+
+### The wake-from-sleep hang is real, and the watchdog rescues it
+
+`OFF | DOG` on two consecutive boots. Init order: `activity_init` arms the WDT at
+`APPLICATION, CONFIG_APPLICATION_INIT_PRIORITY` (90); `sleep_debug_init` clears RESETREAS at 99.
+For both bits to survive together, that boot never reached 99. So: **GPIO wake from System OFF →
+init hangs → watchdog fires 30 s later and recovers.** Nordic confirms System OFF stops the WDT,
+so the watchdog cannot be *causing* the sleep failure — only rescuing it. This is the original bug
+and it remains open.
+
+### The freeze-during-use is NOT a firmware fault
+
+Evidence, all from the 152k-line capture:
+
+- `pmw3610: PM:` shows only `0↔1` (ACTIVE↔IDLE). **Never `→ 2`.** The sleep path was not involved.
+- `zmk_ble_active_profile_conn()` (`app/src/ble.c:341-353`) logs at WRN on both NULL paths, and
+  both strings contain "profile" — the grep found none. **`conn` was never NULL**, so the
+  `hog.c:419` silent-drop path was never taken.
+- No `Error notifying` → `bt_gatt_notify_cb` returned 0 for every report.
+- No `queue full` / `Failed to queue`; events 12–17 ms apart, so the msgq drained.
+- No disconnect logged; endpoint stayed `BLE:0` from 00:09:32 onward.
+- ~200 consecutive mouse reports over 3 s with zero buffer errors → ACL TX buffers were still
+  recycling → **the peer was ACKing at the link layer.**
+
+Conclusion: the firmware delivered every HID report over a healthy, acknowledging connection and
+macOS stopped acting on them. Host-side HID stack wedge, downstream of everything the
+`charybdis.conf:8-12` workqueue/buffer tuning addresses. Not a ZMK deadlock.
+
+Open confirmations: `grep -c "Not sending"` should be 0; next freeze, toggle Bluetooth off/on on
+the Mac without touching the keyboard; reproduce against a second host.
+
+### Consequence for the branch
+
+The freeze and the sleep hang are **two different bugs**. The driver PM bisect (15/15b) was aimed
+at the freeze and is inconclusive for it, since the freeze is host-side. The sleep hang is still
+unexplained and is the one worth pursuing — via live capture across a sleep cycle, not breadcrumbs.
 
 ## Protocol
 
