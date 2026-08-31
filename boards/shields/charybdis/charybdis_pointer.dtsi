@@ -22,13 +22,13 @@
         /* SCROLL mode: Convert trackball movement to scroll wheel.
          * Smooth scrolling (see charybdis_right.conf) makes each wheel unit a
          * fraction of a notch, so more units are needed for usable speed.
-         * Scale factor = mul/div. Currently 1/3 = 0.333 (tuned down from 2/5
-         * for a gentler scroll onset when reading slowly). This is a linear
+         * Scale factor = mul/div. Currently 1/5 = 0.20 (tuned down from 1/3
+         * for a slower, more trackable scroll when reading). This is a linear
          * (velocity-independent) scale; higher divisor = gentler/slower.
-         * Ladder if still too fast: 3/10 = 0.30, then 1/4 = 0.25. */
+         * Ladder if still too fast: 1/6 = 0.167, then 1/8 = 0.125. */
         scroll_mode {
             layers = <6>;
-            input-processors = <&zip_xy_scaler 1 3>,
+            input-processors = <&zip_xy_scaler 1 5>,
                                <&zip_xy_to_scroll_mapper>;
             process-next;
         };
