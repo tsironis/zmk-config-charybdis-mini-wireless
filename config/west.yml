@@ -7,8 +7,8 @@ manifest:
 
   projects:
     - name: zmk
-      remote: tsironis
-      revision: charybdis-input-fix  # ead91ca094c6 (2026-05-04) + PR #3110 input split deadlock fix
+      remote: zmkfirmware
+      revision: 4dd95d7840eb3d5a3f59bb29fbf1ab054715ef85  # 2026-10-09, includes PR #3110 split input deadlock fix
       import: app/west.yml
     - name: zmk-pmw3610-driver
       remote: tsironis
